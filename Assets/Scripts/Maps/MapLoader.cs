@@ -32,7 +32,10 @@ public class MapLoader : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// Saves a map to disk. 
+    /// </summary>
+    /// <param name="filename"></param>
     public void SaveMap(string filename)
     {
         Map = new Map()
@@ -42,13 +45,64 @@ public class MapLoader : MonoBehaviour
             Walls = Walls.GetAllTileData().ToList()
         };
 
-        FileLoader.SaveAsJson($"{FileLoader.ModPath}/{MapFolder}/{filename}.map", Map); 
+        FileLoader.SaveAsJson($"{GetDefaultFilePath()}/{filename}.map", Map); 
     }
 
-    public void LoadMap(string filename)
+    
+    /// <summary>
+    /// Loads a map from file. 
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <returns></returns>
+    public IEnumerator LoadMap(string filename)
     {
-        Map = FileLoader.LoadJson<Map>($"{FileLoader.ModPath}/{MapFolder}/{filename}.map"); 
+        Map = FileLoader.LoadJson<Map>($"{GetDefaultFilePath()}/{filename}.map");
+        BackGround.ClearAllTiles();
+        Foreground.ClearAllTiles();
+        Walls.ClearAllTiles();
+        int count = 0; 
+        foreach(var tile in Map.BackGround)
+        {
+            BackGround.SetTile(tile.Postion, GameManager.GM.TileManager.GetTile(tile.TileName)); 
 
+            if (count >= 100)
+            {
+                count = 0; 
+                yield return null; 
+            }
+        }
+        foreach (var tile in Map.Walls)
+        {
+            Walls.SetTile(tile.Postion, GameManager.GM.TileManager.GetTile(tile.TileName));
+
+            if (count >= 100)
+            {
+                count = 0;
+                yield return null;
+            }
+        }
+        foreach (var tile in Map.ForeGround)
+        {
+            Foreground.SetTile(tile.Postion, GameManager.GM.TileManager.GetTile(tile.TileName));
+
+            if (count >= 100)
+            {
+                count = 0;
+                yield return null;
+            }
+        }
+        Name = filename; 
+
+    }
+
+
+    /// <summary>
+    /// The default file path. 
+    /// </summary>
+    /// <returns></returns>
+    public static string GetDefaultFilePath()
+    {
+        return $"{FileLoader.ModPath}/{MapFolder}"; 
     }
 }
 

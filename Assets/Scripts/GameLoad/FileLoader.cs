@@ -9,7 +9,7 @@ using UnityEngine;
 public static class FileLoader
 {
 
-    public static string ModPath = "./StreamingAssets/GGJ2020"; 
+    public static string ModPath = "./Assets/StreamingAssets/GGJ2020"; 
 
     /// <summary>
     /// Loads an object into data from a json file. 

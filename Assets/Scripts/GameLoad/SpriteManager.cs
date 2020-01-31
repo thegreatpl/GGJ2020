@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class TileManager : MonoBehaviour
+public class SpriteManager : MonoBehaviour
 {
 
-    public Dictionary<string, TileBase> Tiles = new Dictionary<string, TileBase>();
+    public Dictionary<string, Sprite> Sprites = new Dictionary<string, Sprite>();
 
-    TileBase NullTile; 
+    public Sprite NullSprite; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +19,5 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-
-    public TileBase GetTile(string name)
-    {
-        if ()
     }
 }
