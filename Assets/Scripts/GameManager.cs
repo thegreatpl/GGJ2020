@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public TileManager TileManager;
 
-    public SpriteManager SpriteManager; 
+    public SpriteManager SpriteManager;
+
+    public PrefabManager PrefabManager; 
+
 
     public static GameManager GM; 
     // Start is called before the first frame update
@@ -14,7 +17,8 @@ public class GameManager : MonoBehaviour
     {
         GM = this;
         TileManager = GetComponent<TileManager>();
-        SpriteManager = GetComponent<SpriteManager>(); 
+        SpriteManager = GetComponent<SpriteManager>();
+        PrefabManager = GetComponent<PrefabManager>(); 
     }
 
     // Update is called once per frame
