@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileManager: {fileID: 1918487979}
   SpriteManager: {fileID: 0}
+  PrefabManager: {fileID: 0}
 --- !u!4 &1918487978
 Transform:
   m_ObjectHideFlags: 0
@@ -289,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec52ab572228c4468586c389903da9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Prefabs: []
 --- !u!1001 &2498323720984392797
 PrefabInstance:
   m_ObjectHideFlags: 0
