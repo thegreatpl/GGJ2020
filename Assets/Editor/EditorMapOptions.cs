@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EditorMapOptions : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class EditorMapOptions : MonoBehaviour
     static void SaveMap()
     {
         var map = SceneAsset.FindObjectOfType<MapLoader>();
-        if (string.IsNullOrWhiteSpace(map.Name))
-        {
+        //if (string.IsNullOrWhiteSpace(map.Name))
+        //{
             var path = EditorUtility.SaveFilePanel("Save map", MapLoader.GetDefaultFilePath(), "", "map");
             var filename = Path.GetFileNameWithoutExtension(path);
             map.Name = filename;
-        }
+       // }
 
         map.SaveMap(map.Name);
     }
@@ -37,7 +38,8 @@ public class EditorMapOptions : MonoBehaviour
         var map = SceneAsset.FindObjectOfType<MapLoader>();
         map.Foreground.ClearAllTiles();
         map.BackGround.ClearAllTiles();
-        map.Walls.ClearAllTiles(); 
+        map.Walls.ClearAllTiles();
+        map.Name = ""; 
     }
 
 
@@ -45,5 +47,12 @@ public class EditorMapOptions : MonoBehaviour
     static void PopulateTileManager()
     {
 
+        var tileManager = SceneAsset.FindObjectOfType<TileManager>();
+        tileManager.Tiles = new Dictionary<string, TileBase>(); 
+        var tilebase = Resources.FindObjectsOfTypeAll<TileBase>(); 
+        foreach(var tile in tilebase)
+        {
+            tileManager.Tiles.Add(tile.name, tile); 
+        }
     }
 }

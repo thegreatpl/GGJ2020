@@ -6,6 +6,9 @@ using UnityEngine.Tilemaps;
 
 public class MapLoader : MonoBehaviour
 {
+    public GameManager GameManager; 
+
+
     public string Name; 
 
     public Tilemap BackGround;
@@ -63,7 +66,7 @@ public class MapLoader : MonoBehaviour
         int count = 0; 
         foreach(var tile in Map.BackGround)
         {
-            BackGround.SetTile(tile.Postion, GameManager.GM.TileManager.GetTile(tile.TileName)); 
+            BackGround.SetTile(tile.Postion, GameManager.TileManager.GetTile(tile.TileName)); 
 
             if (count >= 100)
             {
@@ -73,7 +76,7 @@ public class MapLoader : MonoBehaviour
         }
         foreach (var tile in Map.Walls)
         {
-            Walls.SetTile(tile.Postion, GameManager.GM.TileManager.GetTile(tile.TileName));
+            Walls.SetTile(tile.Postion, GameManager.TileManager.GetTile(tile.TileName));
 
             if (count >= 100)
             {
@@ -83,7 +86,7 @@ public class MapLoader : MonoBehaviour
         }
         foreach (var tile in Map.ForeGround)
         {
-            Foreground.SetTile(tile.Postion, GameManager.GM.TileManager.GetTile(tile.TileName));
+            Foreground.SetTile(tile.Postion, GameManager.TileManager.GetTile(tile.TileName));
 
             if (count >= 100)
             {
