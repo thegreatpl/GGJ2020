@@ -6,12 +6,12 @@ using UnityEngine;
 public class Attributes
 {
     public float Speed; //Variable for speed
-    int MaxHP; //Variable for MaxHP;
-    int Strength; //Variable for strength
-    int Dexterity; //Variable for dex
-    int Intellect; //Variable for int
+    public int MaxHP; //Variable for MaxHP;
+    public int Strength; //Variable for strength
+    public int Dexterity; //Variable for dex
+    public int Intellect; //Variable for int
 
-
+}
 
 public class Attribute : MonoBehaviour
 {
