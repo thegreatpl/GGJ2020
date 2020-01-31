@@ -52,7 +52,8 @@ public class EditorMapOptions : MonoBehaviour
         var tilebase = Resources.FindObjectsOfTypeAll<TileBase>(); 
         foreach(var tile in tilebase)
         {
-            tileManager.Tiles.Add(tile.name, tile); 
+            if (!tileManager.Tiles.ContainsKey(tile.name))
+                tileManager.Tiles.Add(tile.name, tile); 
         }
     }
 }
