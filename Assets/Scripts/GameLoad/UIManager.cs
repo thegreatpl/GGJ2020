@@ -8,7 +8,9 @@ public class UIManager : MonoBehaviour
     public LoadingBar LoadingBar;
 
 
-    public GameObject GameOverScreen; 
+    public GameObject GameOverScreen;
+
+    public GameObject GameUI; 
 
 
     // Start is called before the first frame update
@@ -42,5 +44,14 @@ public class UIManager : MonoBehaviour
     public void SetScreenGameOver()
     {
         GameOverScreen.SetActive(true); 
+    }
+
+    public void ShowGameUI()
+    {
+        GameUI.SetActive(true); 
+    }
+    public void HideGameUI()
+    {
+        GameUI.SetActive(false);
     }
 }

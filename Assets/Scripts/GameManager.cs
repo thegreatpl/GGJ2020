@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         {
             if (Camera == null)
                 Camera = Instantiate(PrefabManager.GetPrefab("Main Camera")).GetComponent<Camera>();
+            UIManager.HideGameUI(); 
             UIManager.SetScreenGameOver(); 
         }
     }
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
         Camera.transform.parent = player.transform; 
 
         yield return null;
+        UIManager.ShowGameUI(); 
         _gamestarted = true; 
     }
 }
