@@ -26,4 +26,12 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+
+
+    IEnumerator LoadMod()
+    {
+        yield return StartCoroutine(TileManager.LoadTiles());
+        yield return StartCoroutine(SpriteManager.LoadSprites()); 
+    }
 }
