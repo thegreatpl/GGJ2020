@@ -12,12 +12,16 @@ public class GameManager : MonoBehaviour
 
     public AnimationManager AnimationManager;
 
+    public EntityManager EntityManager; 
+
     public UIManager UIManager;
 
     public MapLoader MapLoader;     
 
     public Camera Camera;
 
+
+    bool _gamestarted = false; 
 
     public EntityAttribute PlayerAttributes; 
 
@@ -30,15 +34,21 @@ public class GameManager : MonoBehaviour
         SpriteManager = GetComponent<SpriteManager>();
         PrefabManager = GetComponent<PrefabManager>();
         AnimationManager = GetComponent<AnimationManager>();
-        UIManager = GetComponent<UIManager>(); 
-
+        UIManager = GetComponent<UIManager>();
+        EntityManager = GetComponent<EntityManager>(); 
+        _gamestarted = false; 
         StartCoroutine(LoadMod()); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerAttributes == null && _gamestarted)
+        {
+            if (Camera == null)
+                Camera = Instantiate(PrefabManager.GetPrefab("Main Camera")).GetComponent<Camera>();
+            UIManager.SetScreenGameOver(); 
+        }
     }
 
 
@@ -59,14 +69,22 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void StartNewGame()
+    {        
+        _gamestarted = false; 
+        UIManager.GameOverScreen.SetActive(false);        
+        StartCoroutine(StartGame());
+    }
+
     IEnumerator StartGame()
     {
-
+        MapLoader.ClearMap(); 
         yield return StartCoroutine(MapLoader.LoadMap("City"));
         yield return StartCoroutine(MapLoader.SpawnEntities());
         yield return null; 
         var entityPrefab = PrefabManager.GetPrefab("Entity");
         var player = Instantiate(entityPrefab);
+        player.name = "Player"; 
         player.AddComponent<PlayerController>();
         PlayerAttributes = player.GetComponent<EntityAttribute>();
 
@@ -93,6 +111,7 @@ public class GameManager : MonoBehaviour
 
         Camera.transform.parent = player.transform; 
 
-        yield return null; 
+        yield return null;
+        _gamestarted = true; 
     }
 }

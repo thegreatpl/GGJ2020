@@ -35,6 +35,15 @@ public class MapLoader : MonoBehaviour
 
 
 
+    public void ClearMap()
+    {
+        Foreground.ClearAllTiles();
+        BackGround.ClearAllTiles();
+        Walls.ClearAllTiles();
+        Name = "";
+        GameManager.EntityManager?.CullEntities(); 
+    }
+
     /// <summary>
     /// Saves a map to disk. 
     /// </summary>

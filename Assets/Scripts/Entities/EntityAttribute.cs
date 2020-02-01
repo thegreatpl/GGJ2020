@@ -7,7 +7,13 @@ public class EntityAttribute : MonoBehaviour
     public Attributes Attributes;
 
 
-    public EntityDefines EntityDefines; 
+    public EntityDefines EntityDefines;
+
+
+    void Start()
+    {
+        GameManager.GM.EntityManager.Entities.Add(this); 
+    }
 
     public void LoadEntity(EntityDefines entityDefines)
     {

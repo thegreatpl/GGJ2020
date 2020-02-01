@@ -107,6 +107,55 @@ public class EditorScripts : MonoBehaviour
                         $"{filename}_0_10",
                     }
                  },
+                 //5-8
+                 new AnimationDefine()
+                 {
+                     AnimationName = "AttackLeft", Sprites = new string[]
+                     {
+                         $"{filename}_0_7",
+                         $"{filename}_1_7",
+                         $"{filename}_2_7",
+                         $"{filename}_3_7",
+                         $"{filename}_4_7",
+                         $"{filename}_5_7",
+                     }
+                 },
+                 new AnimationDefine()
+                 {
+                     AnimationName = "AttackRight", Sprites = new string[]
+                     {
+                         $"{filename}_0_5",
+                         $"{filename}_1_5",
+                         $"{filename}_2_5",
+                         $"{filename}_3_5",
+                         $"{filename}_4_5",
+                         $"{filename}_5_5",
+                     }
+                 },
+                 new AnimationDefine()
+                 {
+                     AnimationName = "AttackUp", Sprites = new string[]
+                     {
+                         $"{filename}_0_8",
+                         $"{filename}_1_8",
+                         $"{filename}_2_8",
+                         $"{filename}_3_8",
+                         $"{filename}_4_8",
+                         $"{filename}_5_8",
+                     }
+                 },
+                 new AnimationDefine()
+                 {
+                     AnimationName = "AttackDown", Sprites = new string[]
+                     {
+                         $"{filename}_0_6",
+                         $"{filename}_1_6",
+                         $"{filename}_2_6",
+                         $"{filename}_3_6",
+                         $"{filename}_4_6",
+                         $"{filename}_5_6",
+                     }
+                 },
             };
             fileCollection.Collections.Add(collection); 
         }

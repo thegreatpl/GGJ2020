@@ -19,13 +19,14 @@ public class SpriteAnimator : MonoBehaviour
 
     public List<AnimationLayer> AnimationLayers;
 
+    public string QueuedAnimation { get; protected set; }
 
     void Start()
     {
         counter = AnimationRate;
 
-        CurrentAnimation = "IdleDown"; 
-
+        CurrentAnimation = "IdleDown";
+        QueuedAnimation = null; 
         //StartCoroutine(Animate()); 
     }
 
@@ -37,10 +38,17 @@ public class SpriteAnimator : MonoBehaviour
                 layer.SetAnimation(CurrentAnimation, current);
 
             current++;
-            if (AnimationLayers.Count > 0 
-                && AnimationLayers[0].Animations.ContainsKey(CurrentAnimation) 
+            if (AnimationLayers.Count > 0
+                && AnimationLayers[0].Animations.ContainsKey(CurrentAnimation)
                 && AnimationLayers[0].Animations[CurrentAnimation].Length <= current)
+            {
                 current = 0;
+                if (QueuedAnimation != null)
+                {
+                    CurrentAnimation = QueuedAnimation;
+                    QueuedAnimation = null; 
+                }
+            }
 
             counter = 0;
         }
@@ -56,9 +64,20 @@ public class SpriteAnimator : MonoBehaviour
         if (CurrentAnimation == animation)
             return; 
 
+        if (QueuedAnimation != null)
+        {
+            QueuedAnimation = animation; 
+        }
+
         CurrentAnimation = animation;
         current = 0;
         counter = AnimationRate; 
+    }
+
+
+    public void QueueAnimtiona(string animation)
+    {
+        QueuedAnimation = animation; 
     }
 
 }
