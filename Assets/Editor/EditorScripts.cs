@@ -21,22 +21,22 @@ public class EditorScripts : MonoBehaviour
             {
                 new AnimationDefine()
                 {
-                    AnimationName = "WalkLeft", Sprites = new string[]
+                    AnimationName = "WalkRight", Sprites = new string[]
                     {
                         $"{filename}_0_9",
                         $"{filename}_1_9",
                         $"{filename}_2_9",
+                        $"{filename}_8_9",
                         $"{filename}_3_9",
                         $"{filename}_4_9",
                         $"{filename}_5_9",
                         $"{filename}_6_9",
                         $"{filename}_7_9",
-                        $"{filename}_8_9",
                     }
                 },
                 new AnimationDefine()
                 {
-                    AnimationName = "WalkRight", Sprites = new string[]
+                    AnimationName = "WalkLeft", Sprites = new string[]
                     {
                         $"{filename}_0_11",
                         $"{filename}_1_11",
@@ -53,15 +53,15 @@ public class EditorScripts : MonoBehaviour
                 {
                     AnimationName = "WalkUp", Sprites = new string[]
                     {
-                        $"{filename}_0_8",
-                        $"{filename}_1_8",
-                        $"{filename}_2_8",
-                        $"{filename}_3_8",
-                        $"{filename}_4_8",
-                        $"{filename}_5_8",
-                        $"{filename}_6_8",
-                        $"{filename}_7_8",
-                        $"{filename}_8_8",
+                        $"{filename}_0_12",
+                        $"{filename}_1_12",
+                        $"{filename}_2_12",
+                        $"{filename}_3_12",
+                        $"{filename}_4_12",
+                        $"{filename}_5_12",
+                        $"{filename}_6_12",
+                        $"{filename}_7_12",
+                        $"{filename}_8_12",
                     }
                 },
                 new AnimationDefine()
@@ -81,14 +81,14 @@ public class EditorScripts : MonoBehaviour
                 },
                  new AnimationDefine()
                  {
-                    AnimationName = "IdleLeft", Sprites = new string[]
+                    AnimationName = "IdleRight", Sprites = new string[]
                     {     
                         $"{filename}_0_9",
                     }
                  },
                  new AnimationDefine()
                  {
-                    AnimationName = "IdleRight", Sprites = new string[]
+                    AnimationName = "IdleLeft", Sprites = new string[]
                     {
                         $"{filename}_0_11",
                     }
@@ -97,7 +97,7 @@ public class EditorScripts : MonoBehaviour
                  {
                     AnimationName = "IdleUp", Sprites = new string[]
                     {
-                        $"{filename}_0_8",
+                        $"{filename}_0_12",
                     }
                  },
                  new AnimationDefine()
@@ -107,13 +107,13 @@ public class EditorScripts : MonoBehaviour
                         $"{filename}_0_10",
                     }
                  },
-            }; 
-            
+            };
+            fileCollection.Collections.Add(collection); 
         }
         FileLoader.SaveAsJson($"{FileLoader.ModPath}/{AnimationManager.AnimationFolder}/animations.json", fileCollection); 
     }
 
-    [MenuItem("ModCreation/RenameFiles")]
+  //  [MenuItem("ModCreation/RenameFiles")]
     static void RenameFiles()
     {
         var files = Directory.GetFiles($"{FileLoader.ModPath}/{SpriteManager.SpritePath}", "*.png", SearchOption.AllDirectories);

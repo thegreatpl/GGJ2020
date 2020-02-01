@@ -42,18 +42,38 @@ public class Movement : MonoBehaviour
         switch (_direction)
         {
             case Direction.None:
+                switch (FacingDirection)
+                {
+                    case Direction.None:
+                        break;
+                    case Direction.Left:
+                        SpriteAnimator.SetAnimation("IdleLeft");
+                        break;
+                    case Direction.Up:
+                        SpriteAnimator.SetAnimation("IdleUp");
+                        break;
+                    case Direction.Right:
+                        SpriteAnimator.SetAnimation("IdleRight");
+                        break;
+                    case Direction.Down:
+                        SpriteAnimator.SetAnimation("IdleDown");
+                        break;
+                }
                 break;
             case Direction.Left:
                 SpriteAnimator.SetAnimation("WalkLeft"); 
                 transform.position += new Vector3(-Attribute.attributes.Speed, 0) * Time.deltaTime ;
                 break;
             case Direction.Up:
+                SpriteAnimator.SetAnimation("WalkUp");
                 transform.position += new Vector3(0, Attribute.attributes.Speed) * Time.deltaTime;
                 break;
             case Direction.Right:
+                SpriteAnimator.SetAnimation("WalkRight");
                 transform.position += new Vector3(Attribute.attributes.Speed, 0) * Time.deltaTime;
                 break;
             case Direction.Down:
+                SpriteAnimator.SetAnimation("WalkDown");
                 transform.position += new Vector3(0, -Attribute.attributes.Speed) * Time.deltaTime;
                 break;
         }

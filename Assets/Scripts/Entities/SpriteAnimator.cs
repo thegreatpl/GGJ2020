@@ -24,31 +24,31 @@ public class SpriteAnimator : MonoBehaviour
     {
         counter = AnimationRate;
 
-        CurrentAnimation = "WalkLeft"; 
+        CurrentAnimation = "IdleDown"; 
 
-        StartCoroutine(Animate()); 
+        //StartCoroutine(Animate()); 
     }
 
-    private IEnumerator Animate()
+    void Update()
     {
-        while(true)
+        if (counter >= AnimationRate)
         {
-            if (counter >= AnimationRate)
-            {
-                foreach (var layer in AnimationLayers)
-                    layer.SetAnimation(CurrentAnimation, current); 
+            foreach (var layer in AnimationLayers)
+                layer.SetAnimation(CurrentAnimation, current);
 
-                current++;
-                if (AnimationLayers[0].Animations[CurrentAnimation].Length <= current)
-                    current = 0; 
+            current++;
+            if (AnimationLayers.Count > 0 
+                && AnimationLayers[0].Animations.ContainsKey(CurrentAnimation) 
+                && AnimationLayers[0].Animations[CurrentAnimation].Length <= current)
+                current = 0;
 
-                counter = 0; 
-            }
-
-            counter++; 
-            yield return null; 
+            counter = 0;
         }
+
+        counter++;
     }
+
+   
 
 
     public void SetAnimation(string animation)

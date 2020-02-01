@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
         var layer = PrefabManager.GetPrefab("SpriteLayer");
         var anaimationLayer = Instantiate(layer, player.transform); 
-        anaimationLayer.GetComponent<AnimationLayer>().AssignAnimation(AnimationManager.GetAnimation("WalkLeft"));
+        anaimationLayer.GetComponent<AnimationLayer>().AssignAnimation(AnimationManager.GetAnimation("female_black"));
 
         yield return null; 
     }
