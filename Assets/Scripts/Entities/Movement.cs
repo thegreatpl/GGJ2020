@@ -6,18 +6,36 @@ public class Movement : MonoBehaviour
 {
     public Attribute Attribute; //Reference to Attribute script
 
-
-    public Direction Direction; 
- 
-    void Awake() 
+    Direction _direction;
+    public Direction Direction
     {
+        get { return _direction; }
+        set
+        {
+            if (value == Direction.None && _direction != Direction.None)
+            {
+                FacingDirection = _direction;
+            }
+            else if (value != Direction.None)
+                FacingDirection = value;
+
+            _direction = value;
+        }
+    }
+
+    public Direction FacingDirection;
+
+    private void Start()
+    {
+         _direction = Direction.None;
+        FacingDirection = Direction.Down; 
          Attribute = GetComponent<Attribute>(); //Setup reference
     }
 
 
     void Update()
     {
-        switch (Direction)
+        switch (_direction)
         {
             case Direction.None:
                 break;
@@ -37,28 +55,5 @@ public class Movement : MonoBehaviour
     }
 
 
-        public void MoveUp() //Move upwards
-    {
-        //transform.position += new Vector3(0, Attribute.attributes.Speed);//  .Translate(Vector2.up * Attribute.attributes.Speed);
-    }
-
-    public void MoveDown()  //Move downwards
-    {
-        //transform.Translate(-Vector2.up * Attribute.attributes.Speed);
-       // transform.position += new Vector3(0, -Attribute.attributes.Speed);
-    }
-
-    public void MoveLeft() //Move left
-    {
-       // transform.position += new Vector3( -Attribute.attributes.Speed, 0);
-       // transform.Translate(-Vector2.right * Attribute.attributes.Speed);
-    }
-
-    public void MoveRight() //Move right
-    {
-      //  transform.position += new Vector3(Attribute.attributes.Speed, 0);
-
-       // transform.Translate(Vector2.right * Attribute.attributes.Speed);
-    }
     
 }
