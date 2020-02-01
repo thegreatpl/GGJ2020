@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Attribute Attribute; //Reference to Attribute script
+    Attribute Attribute; //Reference to Attribute script
  
     void Awake() 
     {
@@ -29,5 +29,9 @@ public class Movement : MonoBehaviour
     public void MoveRight() //Move right
     {
         transform.Translate(Vector2.right * Attribute.attributes.Speed);
+    }
+
+    void Update()
+    {
     }
 }
