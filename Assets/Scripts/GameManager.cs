@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
 
     public SpriteManager SpriteManager;
 
-    public PrefabManager PrefabManager; 
+    public PrefabManager PrefabManager;
 
+    public AnimationManager AnimationManager; 
 
     public static GameManager GM; 
     // Start is called before the first frame update
@@ -18,7 +19,10 @@ public class GameManager : MonoBehaviour
         GM = this;
         TileManager = GetComponent<TileManager>();
         SpriteManager = GetComponent<SpriteManager>();
-        PrefabManager = GetComponent<PrefabManager>(); 
+        PrefabManager = GetComponent<PrefabManager>();
+        AnimationManager = GetComponent<AnimationManager>();
+
+        StartCoroutine(LoadMod()); 
     }
 
     // Update is called once per frame
@@ -31,7 +35,23 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadMod()
     {
+        yield return null; 
         yield return StartCoroutine(TileManager.LoadTiles());
-        yield return StartCoroutine(SpriteManager.LoadSprites()); 
+        yield return StartCoroutine(SpriteManager.LoadSprites());
+        yield return StartCoroutine(StartGame()); 
+    }
+
+
+    IEnumerator StartGame()
+    {
+        var entityPrefab = PrefabManager.GetPrefab("Entity");
+        var player = Instantiate(entityPrefab);
+        player.AddComponent<PlayerController>();
+
+        var layer = PrefabManager.GetPrefab("SpriteLayer");
+        var anaimationLayer = Instantiate(layer, player.transform); 
+        anaimationLayer.GetComponent<AnimationLayer>().AssignAnimation(AnimationManager.GetAnimation("WalkLeft"));
+
+        yield return null; 
     }
 }

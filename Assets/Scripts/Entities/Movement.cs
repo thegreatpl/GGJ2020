@@ -6,6 +6,9 @@ public class Movement : MonoBehaviour
 {
     public Attribute Attribute; //Reference to Attribute script
 
+
+    public SpriteAnimator SpriteAnimator; 
+
     Direction _direction;
     public Direction Direction
     {
@@ -30,6 +33,7 @@ public class Movement : MonoBehaviour
          _direction = Direction.None;
         FacingDirection = Direction.Down; 
          Attribute = GetComponent<Attribute>(); //Setup reference
+        SpriteAnimator = GetComponent<SpriteAnimator>(); 
     }
 
 
@@ -40,6 +44,7 @@ public class Movement : MonoBehaviour
             case Direction.None:
                 break;
             case Direction.Left:
+                SpriteAnimator.SetAnimation("WalkLeft"); 
                 transform.position += new Vector3(-Attribute.attributes.Speed, 0) * Time.deltaTime ;
                 break;
             case Direction.Up:
