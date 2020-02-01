@@ -30,6 +30,6 @@ public class SpriteManager : MonoBehaviour
 
     public IEnumerator LoadSprites()
     {
-
+        yield return null; 
     }
 }
