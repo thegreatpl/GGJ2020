@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
+    public LoadingBar LoadingBar; 
+
     public List<GameObject> Screens = new List<GameObject>(); 
 
     // Start is called before the first frame update
@@ -20,8 +22,16 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void ShowLoadingBar(int total)
+    public void ShowLoadingBar()
     {
-
+        LoadingBar.gameObject.SetActive(true);
+    }
+    public void HideLoadingBar()
+    {
+        LoadingBar.gameObject.SetActive(false); 
+    }
+    public void SetLoadingBarProgress(float percentage)
+    {
+        LoadingBar.SetProgress(percentage); 
     }
 }

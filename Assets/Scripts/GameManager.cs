@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public AnimationManager AnimationManager;
 
+    public UIManager UIManager; 
 
     public Camera Camera; 
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         SpriteManager = GetComponent<SpriteManager>();
         PrefabManager = GetComponent<PrefabManager>();
         AnimationManager = GetComponent<AnimationManager>();
+        UIManager = GetComponent<UIManager>(); 
 
         StartCoroutine(LoadMod()); 
     }
@@ -38,10 +40,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadMod()
     {
-        yield return null; 
+
+        yield return null;
+        UIManager.ShowLoadingBar();
         yield return StartCoroutine(TileManager.LoadTiles());
+        UIManager.SetLoadingBarProgress(0.2f); 
         yield return StartCoroutine(SpriteManager.LoadSprites());
-        yield return StartCoroutine(AnimationManager.LoadAnimations()); 
+        UIManager.SetLoadingBarProgress(0.8f);
+        yield return StartCoroutine(AnimationManager.LoadAnimations());
+        UIManager.SetLoadingBarProgress(1); 
+        UIManager.HideLoadingBar();
         yield return StartCoroutine(StartGame()); 
     }
 
