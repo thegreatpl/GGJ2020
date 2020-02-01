@@ -49,5 +49,18 @@ public static class FileLoader
             throw; 
         }
     }
+
+
+    public static Texture2D LoadTexture2D(string file)
+    {
+        if (File.Exists(file))
+        {
+            var filedata = File.ReadAllBytes(file);
+            var texture = new Texture2D(2, 2);
+            texture.LoadImage(filedata);
+            return texture; 
+        }
+        throw new Exception($"File {file} does exist"); 
+    }
 }
 

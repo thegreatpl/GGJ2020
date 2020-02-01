@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO; 
 
 public class SpriteManager : MonoBehaviour
 {
+    public const string SpritePath = "Sprites";
+
 
     public Dictionary<string, Sprite> Sprites = new Dictionary<string, Sprite>();
 
     public Sprite NullSprite; 
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,5 +24,12 @@ public class SpriteManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+
+    public IEnumerator LoadSprites()
+    {
+
     }
 }
