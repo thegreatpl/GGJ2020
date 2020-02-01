@@ -45,7 +45,8 @@ public class MapLoader : MonoBehaviour
         {
             BackGround = BackGround.GetAllTileData().ToList(),
             ForeGround = Foreground.GetAllTileData().ToList(),
-            Walls = Walls.GetAllTileData().ToList()
+            Walls = Walls.GetAllTileData().ToList(), 
+            Entities = Map?.Entities ?? new List<EntityDefines>() 
         };
 
         FileLoader.SaveAsJson($"{GetDefaultFilePath()}/{filename}.map", Map); 
@@ -57,7 +58,7 @@ public class MapLoader : MonoBehaviour
     /// </summary>
     /// <param name="filename"></param>
     /// <returns></returns>
-    public IEnumerator LoadMap(string filename)
+    public IEnumerator LoadMap(string filename, bool yield = true)
     {
         Map = FileLoader.LoadJson<Map>($"{GetDefaultFilePath()}/{filename}.map");
         BackGround.ClearAllTiles();
@@ -71,7 +72,8 @@ public class MapLoader : MonoBehaviour
             if (count >= 100)
             {
                 count = 0; 
-                yield return null; 
+                if (yield)
+                    yield return null; 
             }
         }
         foreach (var tile in Map.Walls)
@@ -81,7 +83,8 @@ public class MapLoader : MonoBehaviour
             if (count >= 100)
             {
                 count = 0;
-                yield return null;
+                if (yield)
+                    yield return null;
             }
         }
         foreach (var tile in Map.ForeGround)
@@ -91,7 +94,8 @@ public class MapLoader : MonoBehaviour
             if (count >= 100)
             {
                 count = 0;
-                yield return null;
+                if (yield)
+                    yield return null;
             }
         }
         Name = filename; 

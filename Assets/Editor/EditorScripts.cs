@@ -127,4 +127,40 @@ public class EditorScripts : MonoBehaviour
             File.Move(file, $"{directory}/{dirName}_{filename}");
         }
     }
+
+
+    [MenuItem("ModCreation/CreateEntityJson")]
+    static void CreateEntityJson()
+    {
+        EntityDefines entityDefines =
+            new EntityDefines()
+            {
+                Attributes = new Attributes()
+                {
+                    Strength = 1,
+                    MaxHP = 10,
+                    Speed = 2,
+                    Dexterity = 1,
+                    Intellect = 1
+                },
+                EntityLayers = new List<EntityLayer>()
+            {
+                new EntityLayer() {DrawLayer = 1, Layername = "male_skeleton", Color= Color.white},
+            },
+                SpawnLocation = new Vector3Int(0, 0, 0),
+                OnDeath = new OnDeath() { ChangeTiles = new List<TileData>()
+                {
+                    new TileData(){Layer = "Background", Postion = new Vector3Int(1, 1, 0), TileName = "Assorted Terrain 1_256_352"},         
+                    new TileData(){Layer = "Background", Postion = new Vector3Int(1, 2, 0), TileName = "Assorted Terrain 1_256_352"},
+                    new TileData(){Layer = "Background", Postion = new Vector3Int(1, 3, 0), TileName = "Assorted Terrain 1_256_352"},
+                    new TileData(){Layer = "Background", Postion = new Vector3Int(1, 4, 0), TileName = "Assorted Terrain 1_256_352"},
+                    new TileData(){Layer = "Background", Postion = new Vector3Int(1, 5, 0), TileName = "Assorted Terrain 1_256_352"},
+                    new TileData(){Layer = "Background", Postion = new Vector3Int(1, 6, 0), TileName = "Assorted Terrain 1_256_352"},
+                },
+                                        
+                ChangePlayerAttributes = new Attributes() }
+            };
+        FileLoader.SaveAsJson($"{FileLoader.ModPath}/Maps/entity.json", entityDefines); 
+        
+    }
 }

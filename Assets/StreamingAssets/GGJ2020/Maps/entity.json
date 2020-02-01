@@ -1,0 +1,91 @@
+{
+    "SpawnLocation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+    },
+    "Attributes": {
+        "Speed": 2.0,
+        "MaxHP": 10,
+        "Strength": 1,
+        "Dexterity": 1,
+        "Intellect": 1
+    },
+    "EntityLayers": [
+        {
+            "DrawLayer": 1,
+            "Layername": "male_skeleton",
+            "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            }
+        }
+    ],
+    "OnDeath": {
+        "ChangeTiles": [
+            {
+                "Postion": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 0
+                },
+                "TileName": "Assorted Terrain 1_256_352",
+                "Layer": "Background"
+            },
+            {
+                "Postion": {
+                    "x": 1,
+                    "y": 2,
+                    "z": 0
+                },
+                "TileName": "Assorted Terrain 1_256_352",
+                "Layer": "Background"
+            },
+            {
+                "Postion": {
+                    "x": 1,
+                    "y": 3,
+                    "z": 0
+                },
+                "TileName": "Assorted Terrain 1_256_352",
+                "Layer": "Background"
+            },
+            {
+                "Postion": {
+                    "x": 1,
+                    "y": 4,
+                    "z": 0
+                },
+                "TileName": "Assorted Terrain 1_256_352",
+                "Layer": "Background"
+            },
+            {
+                "Postion": {
+                    "x": 1,
+                    "y": 5,
+                    "z": 0
+                },
+                "TileName": "Assorted Terrain 1_256_352",
+                "Layer": "Background"
+            },
+            {
+                "Postion": {
+                    "x": 1,
+                    "y": 6,
+                    "z": 0
+                },
+                "TileName": "Assorted Terrain 1_256_352",
+                "Layer": "Background"
+            }
+        ],
+        "ChangePlayerAttributes": {
+            "Speed": 5.0,
+            "MaxHP": 0,
+            "Strength": 0,
+            "Dexterity": 0,
+            "Intellect": 0
+        }
+    }
+}

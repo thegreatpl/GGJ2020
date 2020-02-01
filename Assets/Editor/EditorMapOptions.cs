@@ -30,8 +30,7 @@ public class EditorMapOptions : MonoBehaviour
         var map = SceneAsset.FindObjectOfType<MapLoader>();
         var path = EditorUtility.OpenFilePanel("Load Map", MapLoader.GetDefaultFilePath(), "map");
         var filename = Path.GetFileNameWithoutExtension(path);
-        map.StartCoroutine(map.LoadMap(filename));
-        
+        map.StartCoroutine(map.LoadMap(filename, false));
     }
 
     [MenuItem("Maps/Clear")]

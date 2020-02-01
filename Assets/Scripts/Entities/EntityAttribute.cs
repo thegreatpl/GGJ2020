@@ -33,7 +33,7 @@ public class EntityAttribute : MonoBehaviour
         if (CurrentHP < 0)
         {
             OnDeath();
-            Destroy(this); 
+            Destroy(gameObject); 
         }
     }
 
