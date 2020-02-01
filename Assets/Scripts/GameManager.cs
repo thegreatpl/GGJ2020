@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         yield return null; 
         yield return StartCoroutine(TileManager.LoadTiles());
         yield return StartCoroutine(SpriteManager.LoadSprites());
+        yield return StartCoroutine(AnimationManager.LoadAnimations()); 
         yield return StartCoroutine(StartGame()); 
     }
 

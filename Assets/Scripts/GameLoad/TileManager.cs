@@ -40,12 +40,10 @@ public class TileManager : MonoBehaviour
     public IEnumerator LoadTiles(bool runToComplete = false)
     {
         Tiles = new Dictionary<string, TileBase>(); 
-        var files = Directory.GetFiles($"{FileLoader.ModPath}/{TilePath}"); 
+        var files = Directory.GetFiles($"{FileLoader.ModPath}/{TilePath}", "*.png"); 
 
         foreach(var file in files)
         {
-            if (Path.GetExtension(file) != ".png")
-                continue;
             var texture = FileLoader.LoadTexture2D(file);
             var name = Path.GetFileNameWithoutExtension(file);
 

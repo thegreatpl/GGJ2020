@@ -62,4 +62,12 @@ public class SpriteManager : MonoBehaviour
 
         //yield return null; 
     }
+
+
+    public Sprite GetSprite(string name)
+    {
+        if (Sprites.ContainsKey(name))
+            return Sprites[name];
+        return NullSprite; 
+    }
 }

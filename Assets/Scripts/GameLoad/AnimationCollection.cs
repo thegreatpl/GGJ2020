@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
+public class AnimationFile
+{
+    public List<AnimationCollection> Collections; 
+}
+
+[Serializable]
 public class AnimationCollection
 {
-    public string Name; 
+    public string LayerName; 
 
     public List<AnimationDefine> Animations; 
 }
@@ -16,7 +22,7 @@ public class AnimationCollection
 [Serializable]
 public class AnimationDefine
 {
-    public string Name;
+    public string AnimationName;
 
-    public Sprite[] Sprites; 
+    public string[] Sprites; 
 }
