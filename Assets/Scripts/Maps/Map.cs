@@ -11,7 +11,12 @@ public class Map
 
     public List<TileData> Walls;
 
-    public List<TileData> ForeGround; 
+    public List<TileData> ForeGround;
+
+    /// <summary>
+    /// List of entities who spawn in on this level. 
+    /// </summary>
+    public List<EntityDefines> Entities; 
 
 }
 

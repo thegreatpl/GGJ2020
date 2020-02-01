@@ -16,6 +16,11 @@ public class TileData
     /// <summary>
     /// The name of the tile that is in this position. 
     /// </summary>
-    public string TileName; 
+    public string TileName;
+
+    /// <summary>
+    /// Layer that this tile is being put on. 
+    /// </summary>
+    public string Layer; 
 }
 

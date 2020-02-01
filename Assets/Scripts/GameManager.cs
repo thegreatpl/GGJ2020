@@ -12,9 +12,14 @@ public class GameManager : MonoBehaviour
 
     public AnimationManager AnimationManager;
 
-    public UIManager UIManager; 
+    public UIManager UIManager;
 
-    public Camera Camera; 
+    public MapLoader MapLoader;     
+
+    public Camera Camera;
+
+
+    public EntityAttribute PlayerAttributes; 
 
     public static GameManager GM; 
     // Start is called before the first frame update
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
         yield return null;
         UIManager.ShowLoadingBar();
         yield return StartCoroutine(TileManager.LoadTiles());
-        UIManager.SetLoadingBarProgress(0.2f); 
+        UIManager.SetLoadingBarProgress(0.3f); 
         yield return StartCoroutine(SpriteManager.LoadSprites());
         UIManager.SetLoadingBarProgress(0.8f);
         yield return StartCoroutine(AnimationManager.LoadAnimations());
@@ -56,13 +61,35 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartGame()
     {
+
+        yield return StartCoroutine(MapLoader.LoadMap("City"));
+        yield return StartCoroutine(MapLoader.SpawnEntities());
+        yield return null; 
         var entityPrefab = PrefabManager.GetPrefab("Entity");
         var player = Instantiate(entityPrefab);
         player.AddComponent<PlayerController>();
+        PlayerAttributes = player.GetComponent<EntityAttribute>();
 
-        var layer = PrefabManager.GetPrefab("SpriteLayer");
-        var anaimationLayer = Instantiate(layer, player.transform); 
-        anaimationLayer.GetComponent<AnimationLayer>().AssignAnimation(AnimationManager.GetAnimation("female_black"));
+        PlayerAttributes.LoadEntity(new EntityDefines()
+        {
+            Attributes = new Attributes()
+            {
+                Strength = 1,
+                MaxHP = 100,
+                Speed = 2,
+                Dexterity = 1,
+                Intellect = 1
+            },
+            EntityLayers = new List<EntityLayer>()
+            {
+                new EntityLayer() {DrawLayer = 1, Layername = "female_black", Color= Color.white},
+                new EntityLayer() {DrawLayer = 2, Layername = "female_bangslong2", Color= Color.red}, 
+                new EntityLayer() {DrawLayer = 3, Layername = "female_pants", Color= Color.blue},
+                new EntityLayer() {DrawLayer = 4, Layername = "female_chainmail", Color= Color.white}
+            },
+            SpawnLocation = new Vector3Int(0, 0, 0),
+            OnDeath = new OnDeath() { ChangeTiles = new List<TileData>(), ChangePlayerAttributes = new Attributes() }
+        }) ;
 
         Camera.transform.parent = player.transform; 
 

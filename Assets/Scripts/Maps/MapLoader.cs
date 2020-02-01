@@ -98,6 +98,20 @@ public class MapLoader : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Spawns all the entities into the game. 
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator SpawnEntities()
+    {
+        var prefab = GameManager.PrefabManager.GetPrefab("Entity"); 
+        foreach(var entity in Map.Entities)
+        {
+            var newEntity = Instantiate(prefab);
+            newEntity.GetComponent<EntityAttribute>().LoadEntity(entity);
+            yield return null; 
+        }
+    }
 
     /// <summary>
     /// The default file path. 

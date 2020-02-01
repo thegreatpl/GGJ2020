@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Attribute Attribute; //Reference to Attribute script
+    public EntityAttribute Attribute; //Reference to Attribute script
 
 
     public SpriteAnimator SpriteAnimator; 
@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
     {
          _direction = Direction.None;
         FacingDirection = Direction.Down; 
-         Attribute = GetComponent<Attribute>(); //Setup reference
+         Attribute = GetComponent<EntityAttribute>(); //Setup reference
         SpriteAnimator = GetComponent<SpriteAnimator>(); 
     }
 
@@ -62,19 +62,19 @@ public class Movement : MonoBehaviour
                 break;
             case Direction.Left:
                 SpriteAnimator.SetAnimation("WalkLeft"); 
-                transform.position += new Vector3(-Attribute.attributes.Speed, 0) * Time.deltaTime ;
+                transform.position += new Vector3(-Attribute.Attributes.Speed, 0) * Time.deltaTime ;
                 break;
             case Direction.Up:
                 SpriteAnimator.SetAnimation("WalkUp");
-                transform.position += new Vector3(0, Attribute.attributes.Speed) * Time.deltaTime;
+                transform.position += new Vector3(0, Attribute.Attributes.Speed) * Time.deltaTime;
                 break;
             case Direction.Right:
                 SpriteAnimator.SetAnimation("WalkRight");
-                transform.position += new Vector3(Attribute.attributes.Speed, 0) * Time.deltaTime;
+                transform.position += new Vector3(Attribute.Attributes.Speed, 0) * Time.deltaTime;
                 break;
             case Direction.Down:
                 SpriteAnimator.SetAnimation("WalkDown");
-                transform.position += new Vector3(0, -Attribute.attributes.Speed) * Time.deltaTime;
+                transform.position += new Vector3(0, -Attribute.Attributes.Speed) * Time.deltaTime;
                 break;
         }
     }
@@ -109,7 +109,7 @@ public class Movement : MonoBehaviour
         
         if (hit != null)
         {
-            var att = hit.gameObject.GetComponent<Attribute>();
+            var att = hit.gameObject.GetComponent<EntityAttribute>();
             if (att != null)
             {
                 att.DealDamage(Attribute.GetDamage(), "Slice"); 
