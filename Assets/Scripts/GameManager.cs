@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
 
     public PrefabManager PrefabManager;
 
-    public AnimationManager AnimationManager; 
+    public AnimationManager AnimationManager;
+
+
+    public Camera Camera; 
 
     public static GameManager GM; 
     // Start is called before the first frame update
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
         var layer = PrefabManager.GetPrefab("SpriteLayer");
         var anaimationLayer = Instantiate(layer, player.transform); 
         anaimationLayer.GetComponent<AnimationLayer>().AssignAnimation(AnimationManager.GetAnimation("female_black"));
+
+        Camera.transform.parent = player.transform; 
 
         yield return null; 
     }
