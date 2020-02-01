@@ -55,5 +55,41 @@ public class Movement : MonoBehaviour
     }
 
 
-    
+    public void Attack()
+    {
+        Collider2D  hit;
+        var pos = new Vector2(transform.position.x, transform.position.y); 
+        switch (FacingDirection)
+        {
+            case Direction.None:
+                Debug.Log("Somehow an attacker is facing nowhere"); 
+                return;
+            case Direction.Left:
+                hit = Physics2D.OverlapBox(pos + Vector2.left, new Vector2(0.2f, 0.2f), 0);
+                
+                break;
+            case Direction.Up:
+                hit = Physics2D.OverlapBox(pos + Vector2.up, new Vector2(0.2f, 0.2f), 0);
+                break;
+            case Direction.Right:
+                hit = Physics2D.OverlapBox(pos + Vector2.right, new Vector2(0.2f, 0.2f), 0);
+
+                break;
+            case Direction.Down:
+                hit = Physics2D.OverlapBox(pos + Vector2.down, new Vector2(0.2f, 0.2f), 0);
+                break;
+            default:
+                return; 
+        }
+        
+        if (hit != null)
+        {
+            var att = hit.gameObject.GetComponent<Attribute>();
+            if (att != null)
+            {
+                att.DealDamage(Attribute.GetDamage(), "Slice"); 
+            }
+        }
+
+    }
 }

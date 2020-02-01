@@ -36,8 +36,11 @@ public class PlayerController : MonoBehaviour
         }
 
         if (moveX == 0 && moveY == 0)
-            Movement.Direction = Direction.None; 
+            Movement.Direction = Direction.None;
 
+
+        if (Input.GetAxis("Jump") > 0)
+            Movement.Attack(); 
 
     }
 }
