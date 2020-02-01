@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Attributes attributes; //Reference to Attributes script
+    public Attribute Attribute; //Reference to Attribute script
  
     void Awake() 
     {
-        Attributes attributes = GetComponent<Attributes>(); //Setup reference
+         Attribute = GetComponent<Attribute>(); //Setup reference
     }
 
-    void MoveUp() //Move upwards
+    public void MoveUp() //Move upwards
     {
-        transform.Translate(Vector2.up * attributes.Speed);
+        transform.Translate(Vector2.up * Attribute.attributes.Speed);
     }
 
-    void MoveDown()  //Move downwards
+    public void MoveDown()  //Move downwards
     {
-        transform.Translate(-Vector2.up * attributes.Speed);
+        transform.Translate(-Vector2.up * Attribute.attributes.Speed);
     }
 
-    void MoveLeft() //Move left
+    public void MoveLeft() //Move left
     {
-        transform.Translate(-Vector2.right * attributes.Speed);
+        transform.Translate(-Vector2.right * Attribute.attributes.Speed);
     }
 
-    void MoveRight() //Move right
+    public void MoveRight() //Move right
     {
-        transform.Translate(Vector2.right * attributes.Speed);
+        transform.Translate(Vector2.right * Attribute.attributes.Speed);
     }
 }
