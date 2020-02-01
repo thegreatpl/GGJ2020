@@ -22,7 +22,6 @@ public class SpriteAnimator : MonoBehaviour
 
     void Start()
     {
-        AnimationLayers = GetComponentsInChildren<AnimationLayer>(true).ToList();
         counter = AnimationRate;
 
         CurrentAnimation = "WalkLeft"; 

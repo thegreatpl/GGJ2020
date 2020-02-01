@@ -15,7 +15,8 @@ public class AnimationLayer : MonoBehaviour
 
     void Start()
     {
-        Sprite = GetComponent<SpriteRenderer>(); 
+        Sprite = GetComponent<SpriteRenderer>();
+        transform.parent.GetComponent<SpriteAnimator>()?.AnimationLayers.Add(this); 
     }
 
     public void SetAnimation(string animation, int count)
