@@ -122,6 +122,7 @@ public class MapLoader : MonoBehaviour
         {
             var newEntity = Instantiate(prefab);
             newEntity.GetComponent<EntityAttribute>().LoadEntity(entity);
+            newEntity.AddComponent<EnemyController>(); 
             yield return null; 
         }
     }

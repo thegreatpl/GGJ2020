@@ -7,7 +7,7 @@ public class Attributes
     /// <summary>
     /// How fast this entity. 
     /// </summary>
-    public float Speed = 5; 
+    public float Speed; 
 
     /// <summary>
     /// The maximum HP of an entity. 
