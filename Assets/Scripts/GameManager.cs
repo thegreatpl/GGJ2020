@@ -20,6 +20,13 @@ public class GameManager : MonoBehaviour
 
     public Camera Camera;
 
+    /// <summary>
+    /// The gameinit file. 
+    /// </summary>
+    public GameInit GameInit;
+
+    int _currentLevel; 
+
 
     bool _gamestarted = false; 
 
@@ -50,6 +57,14 @@ public class GameManager : MonoBehaviour
             UIManager.HideGameUI(); 
             UIManager.SetScreenGameOver(); 
         }
+
+        if (EntityManager.Entities.Count < 2 && _gamestarted)
+        {
+            _currentLevel++;
+            if (GameInit.Levels.Length <= _currentLevel)
+                _currentLevel = 0;
+            StartCoroutine(LoadMap()); 
+        }
     }
 
 
@@ -64,6 +79,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(SpriteManager.LoadSprites());
         UIManager.SetLoadingBarProgress(0.8f);
         yield return StartCoroutine(AnimationManager.LoadAnimations());
+        GameInit = FileLoader.LoadJson<GameInit>($"{FileLoader.ModPath}/Game.init"); 
         UIManager.SetLoadingBarProgress(1); 
         UIManager.HideLoadingBar();
         yield return StartCoroutine(StartGame()); 
@@ -79,49 +95,37 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        MapLoader.ClearMap(); 
-        yield return StartCoroutine(MapLoader.LoadMap("wasteland"));
-        yield return StartCoroutine(MapLoader.SpawnEntities());
-        yield return null; 
+        MapLoader.ClearMap();
+        _currentLevel = 0;
         var entityPrefab = PrefabManager.GetPrefab("Entity");
         var player = Instantiate(entityPrefab);
+        player.SetActive(false);
         player.name = "Player"; 
         player.AddComponent<PlayerController>();
         var heal = player.AddComponent<PeacefulHeal>();
-        heal.HealingTiles = new List<string>()
-        {
-             "Assorted Terrain 2_32_416",
-             "Assorted Terrain 2_0_352",
-             "Assorted Terrain 2_32_352",
-             "Assorted Terrain 2_64_352"
-        }; 
+        heal.HealingTiles = GameInit.HealingTiles; 
         PlayerAttributes = player.GetComponent<EntityAttribute>();
 
-        PlayerAttributes.LoadEntity(new EntityDefines()
-        {
-            Attributes = new Attributes()
-            {
-                Strength = 2,
-                MaxHP = 100,
-                Speed = 3,
-                Dexterity = 1,
-                Intellect = 1
-            },
-            EntityLayers = new List<EntityLayer>()
-            {
-                new EntityLayer() {DrawLayer = 1, Layername = "female_black", Color= Color.white},
-                new EntityLayer() {DrawLayer = 2, Layername = "female_bangslong2", Color= Color.red}, 
-                new EntityLayer() {DrawLayer = 3, Layername = "female_pants", Color= Color.blue},
-                new EntityLayer() {DrawLayer = 4, Layername = "female_chainmail", Color= Color.white}
-            },
-            SpawnLocation = new Vector3Int(0, 0, 0),
-            OnDeath = new OnDeath() { ChangeTiles = new List<TileData>(), ChangePlayerAttributes = new Attributes() }
-        }) ;
-
-        Camera.transform.parent = player.transform; 
+        PlayerAttributes.LoadEntity(GameInit.PlayerDefines);
+        yield return StartCoroutine(LoadMap());         
 
         yield return null;
         UIManager.ShowGameUI(); 
+        _gamestarted = true; 
+    }
+
+
+    IEnumerator LoadMap()
+    {
+        _gamestarted = false; 
+        Camera.transform.parent = null; 
+        PlayerAttributes.gameObject.SetActive(false); 
+        yield return StartCoroutine(MapLoader.LoadMap(GameInit.Levels[_currentLevel].LevelFile));
+        yield return StartCoroutine(MapLoader.SpawnEntities());
+        PlayerAttributes.transform.position = GameInit.Levels[_currentLevel].SpawnLoc;        
+
+        PlayerAttributes.gameObject.SetActive(true);  
+        Camera.transform.parent = PlayerAttributes.transform;
         _gamestarted = true; 
     }
 }

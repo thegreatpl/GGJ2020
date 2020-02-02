@@ -29,4 +29,16 @@ public class Attributes
     /// </summary>
     public int Intellect; 
 
+
+    public Attributes Clone()
+    {
+        return new Attributes()
+        {
+            Dexterity = Dexterity,
+            Intellect = Intellect,
+            MaxHP = MaxHP,
+            Speed = Speed,
+            Strength = Strength
+        };
+    }
 }

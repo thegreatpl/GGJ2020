@@ -17,7 +17,7 @@ public class EntityAttribute : MonoBehaviour
 
     public void LoadEntity(EntityDefines entityDefines)
     {
-        Attributes = entityDefines.Attributes;
+        Attributes = entityDefines.Attributes.Clone();
         CurrentHP = Attributes.MaxHP;
         EntityDefines = entityDefines;
 

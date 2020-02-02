@@ -212,4 +212,42 @@ public class EditorScripts : MonoBehaviour
         FileLoader.SaveAsJson($"{FileLoader.ModPath}/Maps/entity.json", entityDefines); 
         
     }
+
+    [MenuItem("ModCreation/CreateGameInit")]
+    static void CreateGameInit()
+    {
+        var gameinit = new GameInit()
+        {
+            HealingTiles = new List<string>()
+            {
+                "Assorted Terrain 2_32_416",
+                "Assorted Terrain 2_0_352",
+                "Assorted Terrain 2_32_352",
+                "Assorted Terrain 2_64_352"
+            },
+            Levels = new LevelInfo[1] { new LevelInfo { LevelFile = "wasteland", SpawnLoc = new Vector3Int(0, 0, 0) } },
+            PlayerDefines = new EntityDefines()
+            {
+                Attributes = new Attributes()
+                {
+                    Strength = 2,
+                    MaxHP = 100,
+                    Speed = 3,
+                    Dexterity = 1,
+                    Intellect = 1
+                },
+                EntityLayers = new List<EntityLayer>()
+                {
+                    new EntityLayer() { DrawLayer = 1, Layername = "female_black", Color = Color.white },
+                    new EntityLayer() { DrawLayer = 2, Layername = "female_bangslong2", Color = Color.red },
+                    new EntityLayer() { DrawLayer = 3, Layername = "female_pants", Color = Color.blue },
+                    new EntityLayer() { DrawLayer = 4, Layername = "female_chainmail", Color = Color.white }
+                },
+                SpawnLocation = new Vector3Int(0, 0, 0),
+                OnDeath = new OnDeath() { ChangeTiles = new List<TileData>(), ChangePlayerAttributes = new Attributes() }
+            }
+        };
+
+        FileLoader.SaveAsJson($"{FileLoader.ModPath}/Game.init", gameinit); 
+    }
 }

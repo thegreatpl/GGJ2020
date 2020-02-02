@@ -1,0 +1,84 @@
+{
+    "Levels": [
+        {
+            "LevelFile": "wasteland",
+            "SpawnLoc": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
+        }
+    ],
+    "PlayerDefines": {
+        "SpawnLocation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "Attributes": {
+            "Speed": 3.0,
+            "MaxHP": 100,
+            "Strength": 2,
+            "Dexterity": 1,
+            "Intellect": 1
+        },
+        "EntityLayers": [
+            {
+                "DrawLayer": 1,
+                "Layername": "female_black",
+                "Color": {
+                    "r": 1.0,
+                    "g": 1.0,
+                    "b": 1.0,
+                    "a": 1.0
+                }
+            },
+            {
+                "DrawLayer": 2,
+                "Layername": "female_bangslong2",
+                "Color": {
+                    "r": 1.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 1.0
+                }
+            },
+            {
+                "DrawLayer": 3,
+                "Layername": "female_pants",
+                "Color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 1.0,
+                    "a": 1.0
+                }
+            },
+            {
+                "DrawLayer": 4,
+                "Layername": "female_chainmail",
+                "Color": {
+                    "r": 1.0,
+                    "g": 1.0,
+                    "b": 1.0,
+                    "a": 1.0
+                }
+            }
+        ],
+        "OnDeath": {
+            "ChangeTiles": [],
+            "ChangePlayerAttributes": {
+                "Speed": 0.0,
+                "MaxHP": 0,
+                "Strength": 0,
+                "Dexterity": 0,
+                "Intellect": 0
+            }
+        }
+    },
+    "HealingTiles": [
+        "Assorted Terrain 2_32_416",
+        "Assorted Terrain 2_0_352",
+        "Assorted Terrain 2_32_352",
+        "Assorted Terrain 2_64_352"
+    ]
+}
