@@ -87,13 +87,21 @@ public class GameManager : MonoBehaviour
         var player = Instantiate(entityPrefab);
         player.name = "Player"; 
         player.AddComponent<PlayerController>();
+        var heal = player.AddComponent<PeacefulHeal>();
+        heal.HealingTiles = new List<string>()
+        {
+             "Assorted Terrain 2_32_416",
+             "Assorted Terrain 2_0_352",
+             "Assorted Terrain 2_32_352",
+             "Assorted Terrain 2_64_352"
+        }; 
         PlayerAttributes = player.GetComponent<EntityAttribute>();
 
         PlayerAttributes.LoadEntity(new EntityDefines()
         {
             Attributes = new Attributes()
             {
-                Strength = 1,
+                Strength = 2,
                 MaxHP = 100,
                 Speed = 3,
                 Dexterity = 1,

@@ -42,5 +42,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Jump") > 0)
             Movement.Attack(); 
 
+
+
+        
     }
 }
