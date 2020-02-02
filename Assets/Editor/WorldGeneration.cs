@@ -295,6 +295,8 @@ public class WorldGeneration : MonoBehaviour
     {
         List<Vector3Int> locations = new List<Vector3Int>();
         var map = SceneAsset.FindObjectOfType<MapLoader>();
+        map.Map.Entities = new List<EntityDefines>(); 
+
 
         var walls = map.Walls.GetAllTileData().Select(x => x.Postion);
         var background = map.BackGround.GetAllTileData().Select(x => x.Postion); 
@@ -320,6 +322,180 @@ public class WorldGeneration : MonoBehaviour
                 locations.Add(pos);
             }
         }
+
+
+        foreach(var loc in locations)
+        {
+            var entity = CreateEntity();
+            entity.SpawnLocation = loc;
+            map.Map.Entities.Add(entity); 
+        }
+
+
+       var awalls = map.Walls.GetAllTileData().ToList();
+        awalls.AddRange(map.BackGround.GetAllTileData());
+        awalls.AddRange(map.Foreground.GetAllTileData()); 
+
+        foreach(var w in awalls)
+        {
+            var entity = GetClosestEntity(w.Postion, map.Map);
+            var replace = Replaces.FirstOrDefault(x => x.corrupt == w.TileName); 
+            if (replace != null)
+            {
+                entity.OnDeath.ChangeTiles.Add(new TileData()
+                {
+                    Layer = w.Layer,
+                    Postion = w.Postion,
+                    TileName = replace.fix
+                });
+            }
+        }
+
+    }
+
+
+    static EntityDefines GetClosestEntity(Vector3Int location, Map map)
+    {
+        float distance = float.MaxValue;
+        EntityDefines entityDefines = null; 
+        foreach(var entity in map.Entities)
+        {
+            var dist = Vector3Int.Distance(location, entity.SpawnLocation);
+            if(dist < distance)
+            {
+                distance = dist;
+                entityDefines = entity; 
+            }
+        }
+        return entityDefines; 
+    }
+
+    static EntityDefines CreateEntity()
+    {
+        var entity = new EntityDefines();
+        var chance = Random.value; 
+
+        if (chance < 0.5f)
+        {
+            entity.Attributes = new Attributes()
+            {
+                Dexterity = 1,
+                Intellect = 1,
+                MaxHP = 5,
+                Speed = 2,
+                Strength = 1
+            };
+            entity.EntityLayers = new List<EntityLayer>() { new EntityLayer() { DrawLayer = 1, Layername = "male_skeleton", Color = Color.white } };
+            entity.OnDeath = new OnDeath()
+            {
+                ChangePlayerAttributes = new Attributes()
+                {
+                    Strength = 0,
+                    Speed = 0,
+                    MaxHP = 0,
+                    Intellect = 0,
+                    Dexterity = 0
+                },
+                ChangeTiles = new List<TileData>()
+
+            };
+            return entity; 
+        }
+        if (chance < 0.7f)
+        {
+            entity.Attributes = new Attributes()
+            {
+                Dexterity = 1,
+                Intellect = 1,
+                MaxHP = 10,
+                Speed = 1,
+                Strength = 2
+            };
+            entity.EntityLayers = new List<EntityLayer>()
+            {
+                new EntityLayer() { DrawLayer = 1, Layername = "male_orc", Color = Color.white },
+                new EntityLayer() { DrawLayer = 2, Layername = "male_pants", Color = Color.white }
+            };
+            entity.OnDeath = new OnDeath()
+            {
+                ChangeTiles = new List<TileData>(),
+                ChangePlayerAttributes = new Attributes()
+                {
+                    Strength = 1,
+                    Speed = 0,
+                    MaxHP = 0,
+                    Intellect = 0,
+                    Dexterity = 0
+                }
+            };
+            return entity; 
+        }
+        else if (chance < 0.9f)
+        {
+            entity.Attributes = new Attributes()
+            {
+                Dexterity = 1,
+                Intellect = 1,
+                MaxHP = 20,
+                Speed = 3,
+                Strength = 2
+            };
+            entity.EntityLayers = new List<EntityLayer>()
+            {
+                new EntityLayer() { DrawLayer = 1, Layername = "female_darkelf", Color = Color.white },
+                new EntityLayer() { DrawLayer = 2, Layername = "female_mohawk", Color = Color.white },
+                new EntityLayer() { DrawLayer = 3, Layername = "female_pants", Color = Color.white },
+                new EntityLayer() { DrawLayer = 4, Layername = "female_corset", Color = Color.white }
+
+            };
+            entity.OnDeath = new OnDeath()
+            {
+                ChangeTiles = new List<TileData>(),
+                ChangePlayerAttributes = new Attributes()
+                {
+                    Strength = 0,
+                    Speed = 0,
+                    MaxHP = 5,
+                    Intellect = 0,
+                    Dexterity = 0
+                }
+            };
+            return entity;
+        }
+        else
+        {
+            entity.Attributes = new Attributes()
+            {
+                Dexterity = 1,
+                Intellect = 1,
+                MaxHP = 50,
+                Speed = 3,
+                Strength = 5
+            };
+            entity.EntityLayers = new List<EntityLayer>()
+            {
+                new EntityLayer() { DrawLayer = 1, Layername = "female_orc", Color = Color.white },
+                new EntityLayer() { DrawLayer = 2, Layername = "female_mohawk", Color = Color.magenta },
+                new EntityLayer() { DrawLayer = 3, Layername = "female_pants", Color = Color.white },
+                new EntityLayer() { DrawLayer = 4, Layername = "female_chainmail", Color = Color.white }
+
+            };
+            entity.OnDeath = new OnDeath()
+            {
+                ChangeTiles = new List<TileData>(),
+                ChangePlayerAttributes = new Attributes()
+                {
+                    Strength = 1,
+                    Speed = 0,
+                    MaxHP = 5,
+                    Intellect = 0,
+                    Dexterity = 0
+                }
+            };
+            return entity;
+        }
+
+
     }
 }
 

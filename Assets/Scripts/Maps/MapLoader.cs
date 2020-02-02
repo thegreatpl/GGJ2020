@@ -17,7 +17,7 @@ public class MapLoader : MonoBehaviour
 
     public Tilemap Foreground; 
 
-    Map Map;
+    public Map Map;
 
     public const string MapFolder = "Maps"; 
 

@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             {
                 Strength = 1,
                 MaxHP = 100,
-                Speed = 2,
+                Speed = 3,
                 Dexterity = 1,
                 Intellect = 1
             },

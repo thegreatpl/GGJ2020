@@ -23,7 +23,8 @@ public static partial class Extensions
                 yield return new TileData()
                 {
                     Postion = pos,
-                    TileName = tile.name
+                    TileName = tile.name, 
+                    Layer = tilemap.name
                 }; 
             }
         }

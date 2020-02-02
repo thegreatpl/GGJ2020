@@ -63,7 +63,7 @@ public class EntityAttribute : MonoBehaviour
         foreach(var tile in ondeath.ChangeTiles)
         {
             var t = GameManager.GM.TileManager.GetTile(tile.TileName); 
-            switch(tile.Layer)
+             switch(tile.Layer)
             {
                 case "Background":
                     GameManager.GM.MapLoader.BackGround.SetTile(tile.Postion, t);
