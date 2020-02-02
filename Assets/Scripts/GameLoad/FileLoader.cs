@@ -5,11 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
+using System.Collections;
 
 public static class FileLoader
 {
+    public delegate void OnAudioLoaded(AudioClip audioClip);  
 
-    public static string ModPath = "./Assets/StreamingAssets/GGJ2020"; 
+
+    public static string ModPath = "./Assets/StreamingAssets/GGJ2020";
+
+    public static string ModPathWebRequest = "/Assets/StreamingAssets/GGJ2020";
 
     /// <summary>
     /// Loads an object into data from a json file. 
@@ -61,6 +67,39 @@ public static class FileLoader
             return texture; 
         }
         throw new Exception($"File {file} does exist"); 
+    }
+
+
+
+    public static IEnumerator LoadAudio(string filePath, OnAudioLoaded OnComplete)
+    {
+        AudioType type; 
+        switch(Path.GetExtension(filePath).ToLower())
+        {
+            case ".wav":
+                type = AudioType.WAV;
+                break; 
+            default:
+                Debug.LogError("Audio extention not recognised"); 
+                yield break; 
+        }
+
+
+        UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(filePath, type);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError)
+        {
+            Debug.LogWarning(request.error + "\n" + filePath);
+        }
+        else
+        {
+            AudioClip clip = DownloadHandlerAudioClip.GetContent(request);
+            clip.name = Path.GetFileNameWithoutExtension(filePath);
+            // Assign to audio source here.
+
+            OnComplete(clip); 
+        }
     }
 }
 

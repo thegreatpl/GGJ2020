@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
 
     public Camera Camera;
 
+    public AudioSource MusicPlayer;
+
+    public AudioClip music; 
+
     /// <summary>
     /// The gameinit file. 
     /// </summary>
@@ -53,7 +57,12 @@ public class GameManager : MonoBehaviour
         if (PlayerAttributes == null && _gamestarted)
         {
             if (Camera == null)
+            {
                 Camera = Instantiate(PrefabManager.GetPrefab("Main Camera")).GetComponent<Camera>();
+                MusicPlayer = Camera.gameObject.GetComponent<AudioSource>();
+                MusicPlayer.clip = music;
+                MusicPlayer.Play(); 
+            }
             UIManager.HideGameUI(); 
             UIManager.SetScreenGameOver(); 
         }
@@ -77,9 +86,15 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(TileManager.LoadTiles());
         UIManager.SetLoadingBarProgress(0.3f); 
         yield return StartCoroutine(SpriteManager.LoadSprites());
-        UIManager.SetLoadingBarProgress(0.8f);
+        UIManager.SetLoadingBarProgress(0.7f);
         yield return StartCoroutine(AnimationManager.LoadAnimations());
+        UIManager.SetLoadingBarProgress(0.8f);
         GameInit = FileLoader.LoadJson<GameInit>($"{FileLoader.ModPath}/Game.init"); 
+        UIManager.SetLoadingBarProgress(0.9f);
+        if (!string.IsNullOrWhiteSpace(GameInit.BackGroundMusic ))
+            yield return StartCoroutine(FileLoader.LoadAudio($"file://{FileLoader.ModPathWebRequest}/{GameInit.BackGroundMusic}", (AudioClip x) => { music = x; }));
+        MusicPlayer.clip = music;
+        MusicPlayer.Play(); 
         UIManager.SetLoadingBarProgress(1); 
         UIManager.HideLoadingBar();
         UIManager.SetScreenGameOver(); 

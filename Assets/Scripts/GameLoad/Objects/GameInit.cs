@@ -8,6 +8,8 @@ using UnityEngine;
 [Serializable]
 public class GameInit
 {
+    public string BackGroundMusic; 
+
     public LevelInfo[] Levels;
 
     public EntityDefines PlayerDefines;
