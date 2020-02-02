@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.PlayerAttributes == null)
+            return; 
         var playerPos = GameManager.PlayerAttributes?.transform;
         if (playerPos == null)
             return; 
