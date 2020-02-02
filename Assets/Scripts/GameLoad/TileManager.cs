@@ -46,7 +46,7 @@ public class TileManager : MonoBehaviour
         {
             var texture = FileLoader.LoadTexture2D(file);
             var name = Path.GetFileNameWithoutExtension(file);
-
+            texture.filterMode = FilterMode.Point; 
             for(int xdx = 0; xdx <= texture.width; xdx += 32)
             {
                 for (int ydx = 0; ydx <= texture.height; ydx += 32)

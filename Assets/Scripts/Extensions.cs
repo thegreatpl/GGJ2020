@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.Tilemaps;
+using UnityEngine;
 
 public static partial class Extensions
 {
@@ -26,6 +27,12 @@ public static partial class Extensions
                 }; 
             }
         }
+    }
+
+
+    public static T RandomElement<T>(this IEnumerable<T> ts)
+    {
+        return ts.ElementAt(UnityEngine.Random.Range(0, ts.Count())); 
     }
 }
 

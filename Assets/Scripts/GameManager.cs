@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StartGame()
     {
         MapLoader.ClearMap(); 
-        yield return StartCoroutine(MapLoader.LoadMap("City"));
+        yield return StartCoroutine(MapLoader.LoadMap("wasteland"));
         yield return StartCoroutine(MapLoader.SpawnEntities());
         yield return null; 
         var entityPrefab = PrefabManager.GetPrefab("Entity");
