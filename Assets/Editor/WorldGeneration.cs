@@ -300,7 +300,7 @@ public class WorldGeneration : MonoBehaviour
 
         var walls = map.Walls.GetAllTileData().Select(x => x.Postion);
         var background = map.BackGround.GetAllTileData().Select(x => x.Postion); 
-        for (int idx = 0; idx < Random.Range(10, 15); idx++)
+        for (int idx = 0; idx < Random.Range(20, 25); idx++)
         {
             var rand = background.RandomElement(); 
             if (walls.Contains(rand))
@@ -430,7 +430,7 @@ public class WorldGeneration : MonoBehaviour
             };
             return entity; 
         }
-        else if (chance < 0.9f)
+        else if (chance < 0.95f)
         {
             entity.Attributes = new Attributes()
             {

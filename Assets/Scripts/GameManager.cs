@@ -82,7 +82,8 @@ public class GameManager : MonoBehaviour
         GameInit = FileLoader.LoadJson<GameInit>($"{FileLoader.ModPath}/Game.init"); 
         UIManager.SetLoadingBarProgress(1); 
         UIManager.HideLoadingBar();
-        yield return StartCoroutine(StartGame()); 
+        UIManager.SetScreenGameOver(); 
+        //yield return StartCoroutine(StartGame()); 
     }
 
 
@@ -127,5 +128,10 @@ public class GameManager : MonoBehaviour
         PlayerAttributes.gameObject.SetActive(true);  
         Camera.transform.parent = PlayerAttributes.transform;
         _gamestarted = true; 
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit(); 
     }
 }

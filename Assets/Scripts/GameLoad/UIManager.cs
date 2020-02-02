@@ -41,9 +41,9 @@ public class UIManager : MonoBehaviour
 
 
 
-    public void SetScreenGameOver()
+    public void SetScreenGameOver(bool active = true)
     {
-        GameOverScreen.SetActive(true); 
+        GameOverScreen.SetActive(active); 
     }
 
     public void ShowGameUI()
