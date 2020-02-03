@@ -13,9 +13,9 @@ public static class FileLoader
     public delegate void OnAudioLoaded(AudioClip audioClip);  
 
 
-    public static string ModPath = "./Assets/StreamingAssets/GGJ2020";
+    public static string ModPath = $"{Application.streamingAssetsPath}/GGJ2020";
 
-    public static string ModPathWebRequest = "/Assets/StreamingAssets/GGJ2020";
+    //public static string ModPathWebRequest = "{}/GGJ2020";
 
     /// <summary>
     /// Loads an object into data from a json file. 

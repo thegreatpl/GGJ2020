@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         GameInit = FileLoader.LoadJson<GameInit>($"{FileLoader.ModPath}/Game.init"); 
         UIManager.SetLoadingBarProgress(0.9f);
         if (!string.IsNullOrWhiteSpace(GameInit.BackGroundMusic ))
-            yield return StartCoroutine(FileLoader.LoadAudio($"file://{FileLoader.ModPathWebRequest}/{GameInit.BackGroundMusic}", (AudioClip x) => { music = x; }));
+            yield return StartCoroutine(FileLoader.LoadAudio($"file://{FileLoader.ModPath}/{GameInit.BackGroundMusic}", (AudioClip x) => { music = x; }));
         MusicPlayer.clip = music;
         MusicPlayer.Play(); 
         UIManager.SetLoadingBarProgress(1); 
